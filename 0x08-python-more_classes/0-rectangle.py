@@ -2,6 +2,3 @@
 
 """defines a rectangle"""
 class Rectangle:
-	pass
-r = Rectangle()
-print(r)
