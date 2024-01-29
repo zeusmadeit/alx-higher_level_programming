@@ -3,4 +3,5 @@
 """defines a rectangle"""
 class Rectangle:
 	pass
-print(Rectangle)
+r = Rectangle()
+print(r)
