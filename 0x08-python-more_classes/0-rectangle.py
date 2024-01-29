@@ -2,3 +2,5 @@
 
 """defines a rectangle"""
 class Rectangle:
+	pass
+print (Rectangle())
