@@ -8,5 +8,5 @@ def read_file(filename=""):
     Agrs:
         filename (string): name of the file to read
     """
-    with open(filename, 'r', encoding="utf-8") as f:
+    with open(filename, encoding="utf-8") as f:
         print(f.read(), end="")
