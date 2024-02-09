@@ -84,31 +84,35 @@ class Rectangle(Base):
         """
         return f"[{self.__class__.__name__}] ({self.id}) {self.x}/{self.y} - {self.width}/{self.height}"
     
-    def update(self, *args):
+    def update(self, *args, **kwargs):
         """assigns an argument to each attribute:"""
-        for index, n in enumerate(args):
-            self.id = n if index == 0 else self.id
-            self.width = n if index == 1 else self.width
-            self.height = n if index == 2 else self.height
-            self.x = n if index == 3 else self.x
-            self.y = n if index == 4 else self.y
+        if args is not None and len(args) >= 1:
+            for index, n in enumerate(args):
+                self.id = n if index == 0 else self.id
+                self.width = n if index == 1 else self.width
+                self.height = n if index == 2 else self.height
+                self.x = n if index == 3 else self.x
+                self.y = n if index == 4 else self.y
+        elif args is None or len(args) < 1:
+            for key, val in kwargs.items():
+                setattr(self, key, val)
 
 if __name__ == "__main__":
 
     r1 = Rectangle(10, 10, 10, 10)
     print(r1)
 
-    r1.update(89)
+    r1.update(height=1)
     print(r1)
 
-    r1.update(89, 2)
+    r1.update(width=1, x=2)
     print(r1)
 
-    r1.update(89, 2, 3)
+    r1.update(y=1, width=2, x=3, id=89)
     print(r1)
 
-    r1.update(89, 2, 3, 4)
+    r1.update(x=1, height=2, y=3, width=4)
     print(r1)
 
-    r1.update(89, 2, 3, 4, 5)
+    r1.update(90, 7, 3, 5, x=1, height=2, y=9, width=4)
     print(r1)
