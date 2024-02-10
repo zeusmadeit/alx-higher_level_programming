@@ -56,3 +56,12 @@ class Base:
 
         dummy.update(**dictionary)
         return dummy
+    
+    @classmethod
+    def load_from_file(cls):
+        """returns a list of instances"""
+        list_int = []
+        with open(f"{cls.__name__}.json", "r") as fd:
+            strr = cls.from_json_string(json.load(fd))
+            
+        return list_int
