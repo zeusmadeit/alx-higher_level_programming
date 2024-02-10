@@ -37,3 +37,22 @@ class Base:
             with open(f"{cls.__name__}.json", 'w') as fd:
                 fd.write(strr)
     
+    @staticmethod
+    def from_json_string(json_string):
+        """returns the list of the JSON string representation json_string"""
+        if json_string is None or len(json_string) < 1:
+            return []
+        else:
+            return json.loads(json_string)
+    
+    @classmethod
+    def create(cls, **dictionary):
+        """returns an instance with all attributes already set"""
+        # create an instance of an existing class
+        if cls.__name__ == 'Rectangle':
+            dummy = cls(1, 1)
+        elif cls.__name__ == 'Square':
+            dummy = cls(1)
+
+        dummy.update(**dictionary)
+        return dummy
