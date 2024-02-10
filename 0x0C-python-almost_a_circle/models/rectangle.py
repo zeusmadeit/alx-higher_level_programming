@@ -96,23 +96,22 @@ class Rectangle(Base):
         elif args is None or len(args) < 1:
             for key, val in kwargs.items():
                 setattr(self, key, val)
+    
+    def to_dictionary(self):
+        """returns the dictionary representation of a Rectangle"""
+        attrs = {k.replace("_Rectangle__", ""): getattr(self, k) for k in self.__dict__ }
+        return attrs
 
 if __name__ == "__main__":
 
-    r1 = Rectangle(10, 10, 10, 10)
+    r1 = Rectangle(10, 2, 1, 9)
     print(r1)
+    r1_dictionary = r1.to_dictionary()
+    print(r1_dictionary)
+    print(type(r1_dictionary))
 
-    r1.update(height=1)
-    print(r1)
-
-    r1.update(width=1, x=2)
-    print(r1)
-
-    r1.update(y=1, width=2, x=3, id=89)
-    print(r1)
-
-    r1.update(x=1, height=2, y=3, width=4)
-    print(r1)
-
-    r1.update(90, 7, 3, 5, x=1, height=2, y=9, width=4)
-    print(r1)
+    r2 = Rectangle(1, 1)
+    print(r2)
+    r2.update(**r1_dictionary)
+    print(r2)
+    print(r1 == r2)
