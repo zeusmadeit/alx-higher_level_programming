@@ -40,29 +40,12 @@ class Square(Rectangle):
             for key, value in kwargs.items():
                 setattr(self, key, value)
 
+    def to_dictionary(self):
+        """returns the dictionary representation of a Square"""
+        attrs = {k.replace("_Rectangle__", ""): getattr(self, k) for k in self.__dict__ if hasattr(self, k)}
+        return attrs
 
 if __name__ == "__main__":
 
-    s1 = Square(5)
-    print(s1)
-
-    s1.update(10)
-    print(s1)
-
-    s1.update(1, 2)
-    print(s1)
-
-    s1.update(1, 2, 3)
-    print(s1)
-
-    s1.update(1, 2, 3, 4)
-    print(s1)
-
-    s1.update(x=12)
-    print(s1)
-
-    s1.update(size=7, y=1)
-    print(s1)
-
-    s1.update(size=7, id=89, y=1)
-    print(s1)
+    r1 = Square(10, 2, 8)
+    print(r1.to_dictionary())
