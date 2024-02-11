@@ -2,6 +2,7 @@
 """Base Module containing the base class for this package"""
 import os.path
 import json
+import csv
 
 class Base:
     """Base class for this package"""
@@ -69,4 +70,39 @@ class Base:
                     list_inst.append(cls.create(**obj))
 
         return list_inst
+    
+    @classmethod
+    def save_to_file_csv(cls, list_objs):
+        """serializes data to CSV and saves it to file"""
+        if list_objs is None or len(list_objs) < 1:
+            with open(f"{cls.__name__}.csv", "w", newline="") as fd:
+                fd.write("[]")
+        else:
+            if cls.__name__ == "Rectangle":
+                fieldnames = ["id", "width", "height", "x", "y"]
+            else:
+                fieldnames = ["id", "width", "x", "y"]
+            with open(f"{cls.__name__}.csv", "w", newline="") as fd:
+                writer = csv.DictWriter(fd, fieldnames=fieldnames)
+                for obj in list_objs:
+                    writer.writerow(obj.to_dictionary())
+    
+    @classmethod
+    def load_from_file_csv(cls):
+        """loads and deserializes a CSV file"""
+
+        if os.path.isfile(f"{cls.__name__}.csv"):
+            if cls.__name__ == "Rectangle":
+                fieldnames = ["id", "width", "height", "x", "y"]
+            else:
+                fieldnames = ["id", "width", "x", "y"]
+
+            with open(f"{cls.__name__}.csv", "r", newline="") as fd:
+                csv_file = csv.DictReader(fd, fieldnames=fieldnames)
+
+                list_dicts = [dict([k, int(v)] for k, v in row.items()) for row in csv_file]
+                return [cls.create(**el) for el in list_dicts]
+
+        return []
+
     

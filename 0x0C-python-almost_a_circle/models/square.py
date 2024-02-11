@@ -42,10 +42,28 @@ class Square(Rectangle):
 
     def to_dictionary(self):
         """returns the dictionary representation of a Square"""
-        attrs = {k.replace("_Rectangle__", ""): getattr(self, k) for k in self.__dict__ if hasattr(self, k)}
+        fieldnames = ['_Rectangle__width', '_Rectangle__x', '_Rectangle__y', 'id']
+        attrs = {k.replace("_Rectangle__", ""): getattr(self, k) for k in self.__dict__ if hasattr(self, k) and k in fieldnames}
         return attrs
 
 if __name__ == "__main__":
 
-    r1 = Square(10, 2, 8)
-    print(r1.to_dictionary())
+    s1 = Square(5)
+    s2 = Square(7, 9, 1)
+    list_squares_input = [s1, s2]
+    print("---\n")
+    print(s1.to_dictionary())
+    print(s2.to_dictionary())
+    print("---\n")
+
+    Square.save_to_file_csv(list_squares_input)
+
+    list_squares_output = Square.load_from_file_csv()
+
+    for square in list_squares_input:
+        print("[{}] {}".format(id(square), square))
+
+    print("---")
+
+    for square in list_squares_output:
+        print("[{}] {}".format(id(square), square))

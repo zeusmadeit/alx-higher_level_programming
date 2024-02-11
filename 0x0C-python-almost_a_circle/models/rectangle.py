@@ -107,15 +107,20 @@ if __name__ == "__main__":
     r1 = Rectangle(10, 7, 2, 8)
     r2 = Rectangle(2, 4)
     list_rectangles_input = [r1, r2]
+    print("---\n")
+    print(r1.to_dictionary())
+    print(r2.to_dictionary())
+    print("---\n")
 
-    Rectangle.save_to_file(list_rectangles_input)
+    Rectangle.save_to_file_csv(list_rectangles_input)
 
-    rectangles_output = Rectangle.load_from_file()
+    list_rectangles_output = Rectangle.load_from_file_csv()
 
     for rect in list_rectangles_input:
-        print(f"[{id(rect)}] {rect}")
+        print("[{}] {}".format(id(rect), rect))
 
     print("---")
 
-    for rect in rectangles_output:
+    for rect in list_rectangles_output:
         print("[{}] {}".format(id(rect), rect))
+
