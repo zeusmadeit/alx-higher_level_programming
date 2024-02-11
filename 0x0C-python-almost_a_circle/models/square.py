@@ -51,10 +51,6 @@ if __name__ == "__main__":
     s1 = Square(5)
     s2 = Square(7, 9, 1)
     list_squares_input = [s1, s2]
-    print("---\n")
-    print(s1.to_dictionary())
-    print(s2.to_dictionary())
-    print("---\n")
 
     Square.save_to_file_csv(list_squares_input)
 
