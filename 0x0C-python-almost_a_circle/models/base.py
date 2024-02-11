@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 """Base Module containing the base class for this package"""
+import os.path
 import json
 
 class Base:
@@ -60,8 +61,12 @@ class Base:
     @classmethod
     def load_from_file(cls):
         """returns a list of instances"""
-        list_int = []
-        with open(f"{cls.__name__}.json", "r") as fd:
-            strr = cls.from_json_string(json.load(fd))
-            
-        return list_int
+        list_inst = []
+        if os.path.isfile(f"{cls.__name__}.json"):
+            with open(f"{cls.__name__}.json", "r") as fd:
+                j_list = cls.from_json_string(fd.read())
+                for obj in j_list:
+                    list_inst.append(cls.create(**obj))
+
+        return list_inst
+    
