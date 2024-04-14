@@ -25,12 +25,11 @@ if __name__ == "__main__":
 
     new_st = State("Louisiana")
     session.add(new_st)
-
+    session.commit()
     state = session.query(State).order_by(State.id)
     if state is not None:
         for st in state:
             print('{0}: {1}'.format(st.id, st.name))
     else:
         print("Not found")
-    session.commit()
     session.close()
