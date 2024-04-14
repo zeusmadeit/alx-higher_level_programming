@@ -24,6 +24,6 @@ if __name__ == "__main__":
 
     session = Session()
 
-    cts = session.query(City).order_by(City.id)
-    for instance in cts:
-        print('{2}: ({0}) {1}'.format(instance.id, instance.name, session.query(State).filter(State.id == instance.state_id).first()))
+    results = session.query(City, State).join(State)
+    for city, state in results.all():
+        print("{}: ({}) {}".format(state.name, city.id, city.name))
