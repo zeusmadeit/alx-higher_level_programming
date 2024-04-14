@@ -5,8 +5,8 @@ from the database hbtn_0e_14_usa
 """
 
 from sys import argv
-from model_city import City
 from model_state import Base, State
+from model_city import City
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
@@ -26,4 +26,4 @@ if __name__ == "__main__":
 
     cts = session.query(City).order_by(City.id)
     for instance in cts:
-        print('{2}: ({0}) {1}'.format(instance.id, instance.name, instance.state_id.name))
+        print('{2}: ({0}) {1}'.format(instance.id, instance.name, session.query(State).filter(State.id == instance.state_id).first()))
