@@ -24,6 +24,7 @@ if __name__ == "__main__":
 
     session = Session()
 
-    state = session.query(State).order_by(State.id).filter(State.name.__contains__('a'))
-    for st in state:
-        print('{0}: {1}'.format(st.id, st.name))
+    states = session.query(State).order_by(State.id).filter(State.name.contains('a'))
+    if states is not None:
+        for state in states:
+            print('{0}: {1}'.format(state.id, state.name))
