@@ -18,8 +18,22 @@ if __name__ == '__main__':
                             user=argv[1], passwd=argv[2], db=argv[3])
 
     with db.cursor() as cursor:
-        cursor.execute("SELECT cities.name FROM cities WHERE states.name = %(state)s JOIN states \
-                       ON cities.state_id = states.id ORDER BY cities.id ASC", {"state", argv[4]})
+        cursor.execute("""
+            SELECT
+                cities.id, cities.name
+            FROM
+                cities
+            JOIN
+                states
+            ON
+                cities.state_id = states.id
+            WHERE
+                states.name LIKE BINARY %(state_name)s
+            ORDER BY
+                cities.id ASC
+        """, {
+            'state_name': argv[4]
+        })
         rows = cursor.fetchall()
 
     if rows is not None:
