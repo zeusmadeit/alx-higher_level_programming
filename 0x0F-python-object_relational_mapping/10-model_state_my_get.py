@@ -24,8 +24,8 @@ if __name__ == "__main__":
 
     session = Session()
 
-    st = session.query(State).filter(State.name == argv[4]).first()
-    if st is not None:
-        print('{0}: {1}'.format(st.id, st.name))
+    state = session.query(State).filter(State.name == argv[4]).first()
+    if state is not None:
+        print('{0}'.format(state.id))
     else:
         print("Not found")
