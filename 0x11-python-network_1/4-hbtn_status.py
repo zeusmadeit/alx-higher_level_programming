@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """ 
-this script that fetches https://alx-intranet.hbtn.io/status
+this script fetches https://alx-intranet.hbtn.io/status
 """
 import requests
 
